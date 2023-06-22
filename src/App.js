@@ -29,7 +29,6 @@ const App = () => {
 
     const items = [...moveableComponents];
     if (items.length > 0) {
-      const lastIndex = items.length - 1;
       setMoveableComponents(items.filter((item, index) => index !== itemIndex));
     }
     console.log(items);
@@ -188,17 +187,20 @@ const Component = ({
     let translateY = beforeTranslate[1];
 
     ref.current.style.transform = `translate(${translateX}px, ${translateY}px)`;
-
+    console.log(`translate(${translateX}px, ${translateY}px)`);
     setNodoReferencia({
       ...nodoReferencia,
       translateX,
       translateY,
-      top: top + translateY < 0 ? 0 : top + translateY,
-      left: left + translateX < 0 ? 0 : left + translateX,
+      // top: top + translateY < 0 ? 0 : top + translateY,
+      // left: left + translateX < 0 ? 0 : left + translateX,
+      top: "0px",
+      left: "0px",
     });
   };
 
   const onResizeEnd = async (e) => {
+    console.log("xxx");
     let newWidth = e.lastEvent?.width;
     let newHeight = e.lastEvent?.height;
 
@@ -272,8 +274,11 @@ const Component = ({
             backgroundRepeat,
           });
         }}
-        onResize={onResize}
-        onResizeEnd={onResizeEnd}
+        onResize={(e) => {
+          e.target.style.width = `${e.width}px`;
+          e.target.style.height = `${e.height}px`;
+          e.target.style.transform = e.drag.transform;
+        }}
         keepRatio={false}
         throttleResize={1}
         renderDirections={["nw", "n", "ne", "w", "e", "sw", "s", "se"]}
