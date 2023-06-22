@@ -1,6 +1,8 @@
 import React, { useRef, useState, useEffect } from "react";
 import Moveable from "react-moveable";
 
+import "./styles.css";
+
 const backgroundSize = ["contain", "cover", "auto", "10%", "20%"];
 const backgroundRepeat = ["repeat-x", "repeat", "space", "round", "no-repeat"];
 const App = () => {
@@ -89,9 +91,11 @@ const App = () => {
   };
 
   return (
-    <main style={{ height: "100vh", width: "100vw" }}>
-      <button onClick={addMoveable}>Add Moveable1</button>
-      <button onClick={deleteMoveable}>Delete Moveable</button>
+    <main className="mainContainer">
+      <div className="buttonsContainer">
+        <button onClick={addMoveable}>Add Moveable1</button>
+        <button onClick={deleteMoveable}>Delete Moveable</button>
+      </div>
       <div
         id="parent"
         className="snapContainer"
